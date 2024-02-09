@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/income")
 public class IncomeController {
+    private final IncomeRepository incomeRepository;
+
+    public IncomeController(IncomeRepository incomeRepository) {
+        this.incomeRepository = incomeRepository;
+    }
 
     @PostMapping
     public Income logIncome(@RequestBody Income income) {
-        // Here you can add code to log the income to your database
-        System.out.println("Logged daily income: " + income.getDailyIncome());
-        return income;
+        return incomeRepository.save(income);
     }
 }
-
