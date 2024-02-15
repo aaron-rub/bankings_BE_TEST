@@ -1,34 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Income Graph</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <title>Financial Tip</title>
 </head>
 <body>
-    <canvas id="incomeChart"></canvas>
-    <script>
-        window.onload = function() {
-            axios.get('http://localhost:8080/incomes')
-                .then(response => {
-                    const data = response.data.map((income, index) => ({
-                        x: index + 1,
-                        y: income.dailyIncome
-                    }));
-                    new Chart(document.getElementById('incomeChart'), {
-                        type: 'line',
-                        data: {
-                            datasets: [{
-                                label: 'Daily Income',
-                                data: data,
-                                fill: false,
-                                backgroundColor: 'rgb(255, 99, 132)',
-                                borderColor: 'rgba(255, 99, 132, 0.2)',
-                            }]
-                        },
-                    });
-                });
-        };
-    </script>
+    <h1>Today's Financial Tip</h1>
+    <p th:text="${financialTip}">Tip will be displayed here</p>
 </body>
 </html>
